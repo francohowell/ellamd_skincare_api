@@ -1,0 +1,14 @@
+# == Schema Information
+#
+# Table name: products_product_ingredients
+#
+#  id                    :integer          not null, primary key
+#  product_id            :integer          not null
+#  product_ingredient_id :integer          not null
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#
+
+good_genes_acid_treatment_water:
+  product: good_genes_acid_treatment
+  product_ingredient: water

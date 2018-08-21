@@ -1,0 +1,16 @@
+# == Schema Information
+#
+# Table name: formulation_ingredients
+#
+#  id             :integer          not null, primary key
+#  formulation_id :integer
+#  ingredient_id  :integer
+#  amount         :decimal(, )
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+
+against_acne_tretinoin:
+  formulation: against_acne
+  ingredient: tretinoin
+  amount: 0.01

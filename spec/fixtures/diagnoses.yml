@@ -1,0 +1,16 @@
+# == Schema Information
+#
+# Table name: diagnoses
+#
+#  id           :integer          not null, primary key
+#  physician_id :integer
+#  note         :text
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  visit_id     :integer
+#
+
+ben_raspail_previous_visit_diagnosis:
+  visit_id: 123 # ben_raspail_previous_visit
+  physician: hannibal_lecter
+  note: ABC

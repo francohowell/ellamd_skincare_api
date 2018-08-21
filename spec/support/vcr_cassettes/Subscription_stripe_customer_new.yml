@@ -1,0 +1,93 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/customers
+    body:
+      encoding: UTF-8
+      string: email=ellamdcustomer%2Bnew%40gmail.com
+    headers:
+      User-Agent:
+      - Stripe/v1 RubyBindings/3.9.1
+      Authorization:
+      - "<AUTHORIZATION>"
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"3.9.1","lang":"ruby","lang_version":"2.4.0 p0 (2016-12-24)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.13.0-32-generic (buildd@lgw01-amd64-004) (gcc version 5.4.0 20160609
+        (Ubuntu 5.4.0-6ubuntu1~16.04.5)) #35~16.04.1-Ubuntu SMP Thu Jan 25 10:13:43
+        UTC 2018","hostname":"vasily-hp-laptop"}'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 14 Feb 2018 03:43:10 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '680'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_Caks0okoaljqMj
+      Stripe-Version:
+      - '2017-06-05'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "cus_CJv0v0oI8DHd9M",
+          "object": "customer",
+          "account_balance": 0,
+          "created": 1518579790,
+          "currency": null,
+          "default_source": null,
+          "delinquent": false,
+          "description": null,
+          "discount": null,
+          "email": "ellamdcustomer+new@gmail.com",
+          "invoice_prefix": "9a8c22b247",
+          "livemode": false,
+          "metadata": {},
+          "shipping": null,
+          "sources": {
+            "object": "list",
+            "data": [],
+            "has_more": false,
+            "total_count": 0,
+            "url": "/v1/customers/cus_CJv0v0oI8DHd9M/sources"
+          },
+          "subscriptions": {
+            "object": "list",
+            "data": [],
+            "has_more": false,
+            "total_count": 0,
+            "url": "/v1/customers/cus_CJv0v0oI8DHd9M/subscriptions"
+          }
+        }
+    http_version: 
+  recorded_at: Wed, 14 Feb 2018 03:43:10 GMT
+recorded_with: VCR 4.0.0

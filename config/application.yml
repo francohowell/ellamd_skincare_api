@@ -1,0 +1,96 @@
+s3_access_key_id: AKIAJHGB6HSG7KAOGYSA
+s3_secret_access_key: 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
+s3_region: us-east-1
+
+twilio_account_sid: AC18875273d753ea9bcc59b166eb314748
+twilio_auth_token: 23780ad6871ad2b1bf4a82118a4b7961
+
+facebook_app_id: "717734908421626"
+facebook_app_secret: 71f0b9f61112daf580d91550ae4ff6d2
+
+stripe_plan_id: primary-2-months-100-dollars
+
+algolia_app_id: X3X8JN0ULR
+algolia_secret_key: 8acf66d510a6541b475700b97ad5de45
+
+development:
+  environment: development-vasily
+  protocol: http
+  host: lvh.me:3000
+  cookie_domain: .lvh.me
+  cookie_name: _ellamd_session_development_v1
+  secret_token: q9BiuUPmsEYXbOIvgyhzReW6AQO0dLHZ
+  devise_secret_key: 2oKVb2iNHQS4bOd8pYZjbppghyT8CHkb
+  devise_pepper: Ex0E8pdcIaYNuPAir8hiVAjlj9fthixq
+  s3_bucket_name: ellamd-v1-development
+  stripe_publishable_key: pk_test_2Ymj7X10BqlpKJE7hcGCbcTH
+  stripe_secret_key: sk_test_26pG7Dgld0YQiI3FXttsxxhG
+  sentry_config_url: https://7a11db8fa80a4a8ea2b888b15cf16632:c41d484213cd484ca5395295995a0e69@sentry.io/195826
+  twilio_phone: "+17084093089"
+  sendgrid_api_key: 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
+  segment_write_key: c8wcJScJs89CLfe1PH46WYPR00rGQqti
+  should_send_emails: "false"
+  should_bcc_emails: "false"
+  stripe_signing_secret: whsec_jB4VY1y3g0pgnAnaqNXDfAvAaSoCBiCX
+
+test:
+  environment: test
+  protocol: http
+  host: lvh.me:3000
+  cookie_domain: .lvh.me
+  cookie_name: _ellamd_session_test_v1
+  secret_token: q9BiuUPmsEYXbOIvgyhzReW6AQO0d000
+  devise_secret_key: 2oKVb2iNHQS4bOd8pYZjbppghyT8C000
+  devise_pepper: Ex0E8pdcIaYNuPAir8hiVAjlj9fth000
+  s3_bucket_name: ellamd-v1-test
+  stripe_publishable_key: pk_test_2Ymj7X10BqlpKJE7hcGCbcTH
+  stripe_secret_key: sk_test_26pG7Dgld0YQiI3FXttsxxhG
+  sentry_config_url: https://7a11db8fa80a4a8ea2b888b15cf16632:c41d484213cd484ca5395295995a0e69@sentry.io/195826
+  twilio_phone: "+17084093089"
+  sendgrid_api_key: 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
+  segment_write_key: c8wcJScJs89CLfe1PH46WYPR00rGQqti
+  should_send_emails: "sandbox"
+  should_bcc_emails: "false"
+  stripe_signing_secret: whsec_jB4VY1y3g0pgnAnaqNXDfAvAaSoCBiCX
+
+staging:
+  environment: staging
+  protocol: https
+  host: api.staging.ellamd.com
+  cookie_domain: .staging.ellamd.com
+  cookie_name: _ellamd_session_staging_v1
+  secret_token: Cf63NRChkrLCxdVaz7rVNen2feJBy4pa
+  devise_secret_key: dnS4IGWxdMbTMFGQ4jVpfn3vx4Hs15t7
+  devise_pepper: rdB8ALH0ekLBljLaGgQJB5KiKX7UX2ne
+  s3_bucket_name: ellamd-v1-staging
+  stripe_publishable_key: pk_test_2Ymj7X10BqlpKJE7hcGCbcTH
+  stripe_secret_key: sk_test_26pG7Dgld0YQiI3FXttsxxhG
+  sentry_config_url: https://cac59d206b484452a5d36ceb0255d470:1891efa629d7473c898679e74ba24a46@sentry.io/195827
+  twilio_phone: "+14159913380"
+  SKYLIGHT_AUTHENTICATION: gd0tf3WG06kHWJzJcqQ8zjMi9sl9NnTd2y62fV9bhHs
+  SKYLIGHT_ENABLED: "true"
+  sendgrid_api_key: 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
+  segment_write_key: GxPR9B6wxGh7dIxZtZDUjqeBVjNHYuHk
+  should_send_emails: "false"
+  should_bcc_emails: "false"
+  stripe_signing_secret: whsec_jB4VY1y3g0pgnAnaqNXDfAvAaSoCBiCX
+
+production:
+  environment: production
+  protocol: https
+  host: api.my.ellamd.com
+  cookie_domain: .my.ellamd.com
+  cookie_name: _ellamd_session_v1
+  secret_token: xpZFseLrBdpl0eFXhhVBMRS2LO6FKNXN
+  devise_secret_key: o6KNnEyS7LZTKEuokTe2jBDqfxd8p2Bm
+  devise_pepper: XoGgfOoj0y5NkAnQk7mAsEiysCXz3pM2
+  s3_bucket_name: ellamd-v1-production
+  stripe_publishable_key: pk_live_7gvKo5SWrAVGOBh050kL8oqt
+  stripe_secret_key: sk_live_BUfEDzwvQi2oPrHk4esDZFXb
+  sentry_config_url: https://35fd044f48c842d6962f86c18c01a415:ce9d0939acfc4c3492e52fa382c5e802@sentry.io/195828
+  twilio_phone: "+18312747405"
+  sendgrid_api_key: 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
+  segment_write_key: 5M2WjhiCrTGY44AlXUmQihxdC5cOFGjP
+  should_send_emails: "true"
+  should_bcc_emails: "true"
+  stripe_signing_secret: whsec_OcbWM98NcMbc3NDiEFBiHDTCYBviPY1L

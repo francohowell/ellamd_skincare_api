@@ -1,0 +1,21 @@
+# == Schema Information
+#
+# Table name: visits
+#
+#  id                :integer          not null, primary key
+#  customer_id       :integer
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  payment_status    :integer          default("unpaid"), not null
+#  stripe_invoice_id :string
+#
+
+ben_raspail_previous_visit:
+  id: 123
+  customer: ben_raspail
+  payment_status: paid
+
+ben_raspail_current_visit:
+  id: 124
+  customer: ben_raspail
+  payment_status: unpaid

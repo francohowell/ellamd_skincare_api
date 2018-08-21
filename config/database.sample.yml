@@ -1,0 +1,9 @@
+# Specifications for the production database are injected via environment variables.
+test:
+  adapter: postgresql
+  encoding: utf8
+  database: ellamd_development
+  pool: 5
+  username: <%= ENV["PGUSER"] %>
+  password:
+  host: <%= ENV["PGHOST"] %>

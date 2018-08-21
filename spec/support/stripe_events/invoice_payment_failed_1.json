@@ -1,0 +1,84 @@
+{
+  "object": {
+    "id": "in_000LriDHigVOsSF3WLwtrPy0",
+    "object": "invoice",
+    "amount_due": 10000,
+    "application_fee": null,
+    "attempt_count": 1,
+    "attempted": true,
+    "billing": "charge_automatically",
+    "charge": "ch_000LriDHigVOsSF39MqFHL8K",
+    "closed": false,
+    "currency": "usd",
+    "customer": "cus_CJzrCJDKa8wA2A",
+    "date": 1518597826,
+    "description": null,
+    "discount": null,
+    "due_date": null,
+    "ending_balance": 0,
+    "forgiven": false,
+    "lines": {
+      "object": "list",
+      "data": [
+        {
+          "id": "sub_CJzrCobuq9k8GT",
+          "object": "line_item",
+          "amount": 10000,
+          "currency": "usd",
+          "description": null,
+          "discountable": true,
+          "livemode": false,
+          "metadata": {
+          },
+          "period": {
+            "start": 1518597826,
+            "end": 1523695426
+          },
+          "plan": {
+            "id": "primary-2-months-100-dollars",
+            "object": "plan",
+            "amount": 10000,
+            "created": 1518581077,
+            "currency": "usd",
+            "interval": "month",
+            "interval_count": 2,
+            "livemode": false,
+            "metadata": {
+            },
+            "nickname": null,
+            "product": "prod_CJvMHQqCivWnUm",
+            "trial_period_days": null,
+            "statement_descriptor": null,
+            "name": "Primary: 2 months for $100"
+          },
+          "proration": false,
+          "quantity": 1,
+          "subscription": null,
+          "subscription_item": "si_CJzroJUUVRuPjX",
+          "type": "subscription"
+        }
+      ],
+      "has_more": false,
+      "total_count": 1,
+      "url": "/v1/invoices/in_1BvLriDHigVOsSF3WLwtrPyi/lines"
+    },
+    "livemode": false,
+    "metadata": {
+    },
+    "next_payment_attempt": null,
+    "number": "a45d08c19e-0001",
+    "paid": false,
+    "period_end": 1518597826,
+    "period_start": 1518597826,
+    "receipt_number": null,
+    "starting_balance": 0,
+    "statement_descriptor": null,
+    "subscription": "sub_CJzrCobuq9k8GT",
+    "subtotal": 10000,
+    "tax": null,
+    "tax_percent": null,
+    "total": 10000,
+    "webhooks_delivered_at": null
+  },
+  "previous_attributes": null
+}

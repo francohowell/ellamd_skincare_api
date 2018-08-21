@@ -1,0 +1,16 @@
+# == Schema Information
+#
+# Table name: diagnosis_conditions
+#
+#  id           :integer          not null, primary key
+#  diagnosis_id :integer
+#  condition_id :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  description  :text
+#
+
+ben_raspail_previous_visit_diagnosis_acne:
+  diagnosis: ben_raspail_previous_visit_diagnosis
+  condition: acne
+  description: ABC

@@ -1,0 +1,231 @@
+Raven 2.7.3 ready to catch errors
+Sending event 9d9cf10915374ca6b9ac85890ef1e24e to Sentry
+Raven HTTP Transport connecting to https://sentry.io
+Raven 2.7.3 ready to catch errors
+  [1m[35m (284.6ms)[0m  [1m[35mCREATE DATABASE "ellamd_development" ENCODING = 'utf8'[0m
+  [1m[35m (287.7ms)[0m  [1m[35mCREATE DATABASE "ellamd_test" ENCODING = 'utf8'[0m
+Raven 2.7.3 ready to catch errors
+  [1m[35m (7.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (11.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8531363850488515680)[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to DeviseTokenAuthCreateIdentities (20170621223204)
+  [1m[35m (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.8ms)[0m  [1m[35mCREATE TABLE "identities" ("id" serial NOT NULL PRIMARY KEY, "provider" character varying DEFAULT 'email' NOT NULL, "uid" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" character varying, "last_sign_in_ip" character varying, "confirmation_token" character varying, "confirmed_at" timestamp, "confirmation_sent_at" timestamp, "unconfirmed_email" character varying, "email" character varying, "first_name" character varying, "last_name" character varying, "tokens" json, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_identities_on_email" ON "identities"  ("email")[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_identities_on_uid_and_provider" ON "identities"  ("uid", "provider")[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_identities_on_reset_password_token" ON "identities"  ("reset_password_token")[0m
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_identities_on_confirmation_token" ON "identities"  ("confirmation_token")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170621223204"]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePhysicians (20170622155409)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.4ms)[0m  [1m[35mCREATE TABLE "physicians" ("id" serial NOT NULL PRIMARY KEY, "identity_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_0afe4e4c98"
+FOREIGN KEY ("identity_id")
+  REFERENCES "identities" ("id")
+)[0m
+  [1m[35m (2.1ms)[0m  [1m[35mCREATE  INDEX  "index_physicians_on_identity_id" ON "physicians"  ("identity_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170622155409"]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCustomers (20170622155410)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.1ms)[0m  [1m[35mCREATE TABLE "customers" ("id" serial NOT NULL PRIMARY KEY, "identity_id" integer, "physician_id" integer, "ready_for_physician" boolean, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_70c6e5eaa6"
+FOREIGN KEY ("identity_id")
+  REFERENCES "identities" ("id")
+, CONSTRAINT "fk_rails_992c84e2e6"
+FOREIGN KEY ("physician_id")
+  REFERENCES "physicians" ("id")
+)[0m
+  [1m[35m (5.1ms)[0m  [1m[35mCREATE  INDEX  "index_customers_on_identity_id" ON "customers"  ("identity_id")[0m
+  [1m[35m (24.1ms)[0m  [1m[35mCREATE  INDEX  "index_customers_on_physician_id" ON "customers"  ("physician_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170622155410"]]
+  [1m[35m (1.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePharmacists (20170622155651)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.2ms)[0m  [1m[35mCREATE TABLE "pharmacists" ("id" serial NOT NULL PRIMARY KEY, "identity_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_8b8b9dcd8f"
+FOREIGN KEY ("identity_id")
+  REFERENCES "identities" ("id")
+)[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE  INDEX  "index_pharmacists_on_identity_id" ON "pharmacists"  ("identity_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170622155651"]]
+  [1m[35m (2.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateAdministrators (20170622155657)
+  [1m[35m (0.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.6ms)[0m  [1m[35mCREATE TABLE "administrators" ("id" serial NOT NULL PRIMARY KEY, "identity_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_38239d857a"
+FOREIGN KEY ("identity_id")
+  REFERENCES "identities" ("id")
+)[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE  INDEX  "index_administrators_on_identity_id" ON "administrators"  ("identity_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170622155657"]]
+  [1m[35m (2.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProfiles (20170622155658)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.7ms)[0m  [1m[35mCREATE TABLE "profiles" ("id" serial NOT NULL PRIMARY KEY, "customer_id" integer, "sex" character varying, "address_line_1" character varying, "address_line_2" character varying, "zip_code" character varying, "state" character varying, "city" character varying, "phone" character varying, "date_of_birth" timestamp, "skin_concerns" character varying[] DEFAULT '{}' NOT NULL, "ethnicity" character varying, "sun_sensitivity" float, "sun_exposure_in_minutes_per_day" integer, "skin_type" character varying, "known_allergies" character varying, "smoker" boolean, "been_on_accutane" boolean, "hormonal_issues" boolean, "pregnant" boolean, "breast_feeding" boolean, "birth_control" boolean, "other_concerns" text, "topical_medications" text, "prescription_medications" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_f3a6465ce5"
+FOREIGN KEY ("customer_id")
+  REFERENCES "customers" ("id")
+)[0m
+  [1m[35m (2.1ms)[0m  [1m[35mCREATE  INDEX  "index_profiles_on_customer_id" ON "profiles"  ("customer_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170622155658"]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePhotos (20170622155659)
+  [1m[35m (0.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (6.0ms)[0m  [1m[35mCREATE TABLE "photos" ("id" serial NOT NULL PRIMARY KEY, "customer_id" integer, "image_file_name" character varying, "image_content_type" character varying, "image_file_size" integer, "image_updated_at" timestamp, "rating" float, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_7eebac098e"
+FOREIGN KEY ("customer_id")
+  REFERENCES "customers" ("id")
+)[0m
+  [1m[35m (3.6ms)[0m  [1m[35mCREATE  INDEX  "index_photos_on_customer_id" ON "photos"  ("customer_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170622155659"]]
+  [1m[35m (1.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateDiagnoses (20170622155700)
+  [1m[35m (0.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (8.5ms)[0m  [1m[35mCREATE TABLE "diagnoses" ("id" serial NOT NULL PRIMARY KEY, "customer_id" integer, "physician_id" integer, "note" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_71ea9484c0"
+FOREIGN KEY ("customer_id")
+  REFERENCES "customers" ("id")
+, CONSTRAINT "fk_rails_f2674b41c7"
+FOREIGN KEY ("physician_id")
+  REFERENCES "physicians" ("id")
+)[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE  INDEX  "index_diagnoses_on_customer_id" ON "diagnoses"  ("customer_id")[0m
+  [1m[35m (2.1ms)[0m  [1m[35mCREATE  INDEX  "index_diagnoses_on_physician_id" ON "diagnoses"  ("physician_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170622155700"]]
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateIngredients (20170622195308)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.4ms)[0m  [1m[35mCREATE TABLE "ingredients" ("id" serial NOT NULL PRIMARY KEY, "name" character varying NOT NULL, "minimum_amount" float NOT NULL, "maximum_amount" float NOT NULL, "unit" character varying NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170622195308"]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePrescriptions (20170622195619)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (6.4ms)[0m  [1m[35mCREATE TABLE "prescriptions" ("id" serial NOT NULL PRIMARY KEY, "customer_id" integer, "physician_id" integer, "note" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_bb1991c551"
+FOREIGN KEY ("customer_id")
+  REFERENCES "customers" ("id")
+, CONSTRAINT "fk_rails_8ceb805ba2"
+FOREIGN KEY ("physician_id")
+  REFERENCES "physicians" ("id")
+)[0m
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE  INDEX  "index_prescriptions_on_customer_id" ON "prescriptions"  ("customer_id")[0m
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE  INDEX  "index_prescriptions_on_physician_id" ON "prescriptions"  ("physician_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170622195619"]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePrescriptionIngredients (20170622200126)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE TABLE "prescription_ingredients" ("id" serial NOT NULL PRIMARY KEY, "prescription_id" integer, "ingredient_id" integer, "amount" float DEFAULT 0.0 NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_016fd7d652"
+FOREIGN KEY ("prescription_id")
+  REFERENCES "prescriptions" ("id")
+, CONSTRAINT "fk_rails_fe8db846b2"
+FOREIGN KEY ("ingredient_id")
+  REFERENCES "ingredients" ("id")
+)[0m
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE  INDEX  "index_prescription_ingredients_on_prescription_id" ON "prescription_ingredients"  ("prescription_id")[0m
+  [1m[35m (2.2ms)[0m  [1m[35mCREATE  INDEX  "index_prescription_ingredients_on_ingredient_id" ON "prescription_ingredients"  ("ingredient_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170622200126"]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateConditions (20170622200702)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (6.0ms)[0m  [1m[35mCREATE TABLE "conditions" ("id" serial NOT NULL PRIMARY KEY, "name" character varying NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170622200702"]]
+  [1m[35m (2.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateDiagnosisConditions (20170622200728)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.8ms)[0m  [1m[35mCREATE TABLE "diagnosis_conditions" ("id" serial NOT NULL PRIMARY KEY, "diagnosis_id" integer, "condition_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_67d3b73ce3"
+FOREIGN KEY ("diagnosis_id")
+  REFERENCES "diagnoses" ("id")
+, CONSTRAINT "fk_rails_d34e18047a"
+FOREIGN KEY ("condition_id")
+  REFERENCES "conditions" ("id")
+)[0m
+  [1m[35m (3.1ms)[0m  [1m[35mCREATE  INDEX  "index_diagnosis_conditions_on_diagnosis_id" ON "diagnosis_conditions"  ("diagnosis_id")[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE  INDEX  "index_diagnosis_conditions_on_condition_id" ON "diagnosis_conditions"  ("condition_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170622200728"]]
+  [1m[35m (1.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddTokenToPrescriptions (20170705222855)
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "prescriptions" ADD "token" character varying[0m
+  [1m[36mPrescription Load (0.7ms)[0m  [1m[34mSELECT  "prescriptions".* FROM "prescriptions" ORDER BY "prescriptions"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  [1m[36mActiveRecord::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170705222855"]]
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddSignatureImageToPhysicians (20170706025859)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.4ms)[0m  [1m[35mALTER TABLE "physicians" ADD "signature_image_file_name" character varying[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "physicians" ADD "signature_image_content_type" character varying[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "physicians" ADD "signature_image_file_size" integer[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "physicians" ADD "signature_image_updated_at" timestamp[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170706025859"]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddLicensesToPhysicians (20170706030955)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "physicians" ADD "state_license" character varying[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "physicians" ADD "dea_license" character varying[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170706030955"]]
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddProfileInformationToPhysician (20170706031504)
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "physicians" ADD "address" text[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "physicians" ADD "phone" character varying[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170706031504"]]
+  [1m[35m (1.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateDownloads (20170706045414)
+  [1m[35m (1.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.1ms)[0m  [1m[35mCREATE TABLE "downloads" ("id" serial NOT NULL PRIMARY KEY, "prescription_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_0b5cc465ad"
+FOREIGN KEY ("prescription_id")
+  REFERENCES "prescriptions" ("id")
+)[0m
+  [1m[35m (3.8ms)[0m  [1m[35mCREATE  INDEX  "index_downloads_on_prescription_id" ON "downloads"  ("prescription_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170706045414"]]
+  [1m[35m (1.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddSignaEtcToPrescriptions (20170706070321)
+  [1m[35m (1.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (10.0ms)[0m  [1m[35mALTER TABLE "prescriptions" ADD "signa" text DEFAULT '' NOT NULL[0m
+  [1m[35m (7.5ms)[0m  [1m[35mALTER TABLE "prescriptions" ADD "customer_instructions" text DEFAULT '' NOT NULL[0m
+  [1m[35m (9.0ms)[0m  [1m[35mALTER TABLE "prescriptions" ADD "pharmacist_instructions" text DEFAULT '' NOT NULL[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "prescriptions" DROP COLUMN "note"[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170706070321"]]
+  [1m[35m (2.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddTrackingNumberToPrescriptions (20170706075534)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "prescriptions" ADD "tracking_number" text[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170706075534"]]
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateFormulations (20170706093818)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.9ms)[0m  [1m[35mCREATE TABLE "formulations" ("id" serial NOT NULL PRIMARY KEY, "number" integer, "main_tag" text, "cream_base" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170706093818"]]
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateFormulationIngredients (20170706093838)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.4ms)[0m  [1m[35mCREATE TABLE "formulation_ingredients" ("id" serial NOT NULL PRIMARY KEY, "formulation_id" integer, "ingredient_id" integer, "amount" decimal, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_b7ce41bc9c"
+FOREIGN KEY ("formulation_id")
+  REFERENCES "formulations" ("id")
+, CONSTRAINT "fk_rails_cc6ac86355"
+FOREIGN KEY ("ingredient_id")
+  REFERENCES "ingredients" ("id")
+)[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE  INDEX  "index_formulation_ingredients_on_formulation_id" ON "formulation_ingredients"  ("formulation_id")[0m
+  [1m[35m (3.6ms)[0m  [1m[35mCREATE  INDEX  "index_formulation_ingredients_on_ingredient_id" ON "formulation_ingredients"  ("ingredient_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170706093838"]]
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddFragranceAndCreamBaseToPrescription (20170706095319)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.9ms)[0m  [1m[35mALTER TABLE "prescriptions" ADD "fragrance" character varying[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "prescriptions" ADD "cream_base" character varying[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170706095319"]]
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddDescriptionClassesAndPremiumToIngredients (20170708201238)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "ingredients" ADD "description" text[0m
+  [1m[35m (6.4ms)[0m  [1m[35mALTER TABLE "ingredients" ADD "classes" character varying[] DEFAULT '{}' NOT NULL[0m
+  [1m[35m (4.4ms)[0m  [1m[35mALTER TABLE "ingredients" ADD "premium" boolean DEFAULT FALSE NOT NULL[0m
+  [1m[35m (4.6ms)[0m  [1m[35mALTER TABLE "ingredients" ADD "prescription" boolean DEFAULT FALSE NOT NULL[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170708201238"]]
+  [1m[35m (1.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddVolumeInMlToPrescriptions (20170709194605)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (8.8ms)[0m  [1m[35mALTER TABLE "prescriptions" ADD "volume_in_ml" integer DEFAULT 15 NOT NULL[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170709194605"]]
+  [1m[35m (1.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to RemoveUnderscoresFromSkinConcerns (20170710034058)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_advisory_unlock(8531363850488515680)[0m
+Sending event a61b528b6ec74e5398a5bc2387f23852 to Sentry
+Raven HTTP Transport connecting to https://sentry.io

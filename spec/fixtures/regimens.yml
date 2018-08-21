@@ -1,0 +1,18 @@
+# == Schema Information
+#
+# Table name: regimens
+#
+#  id           :integer          not null, primary key
+#  customer_id  :integer          not null
+#  physician_id :integer
+#  visit_id     :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
+
+ben_raspail_actual_regimen:
+  customer: ben_raspail
+
+ben_raspail_previous_visit_regimen:
+  customer: ben_raspail
+  visit_id: 123 # ben_raspail_previous_visit

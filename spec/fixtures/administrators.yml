@@ -1,0 +1,11 @@
+# == Schema Information
+#
+# Table name: administrators
+#
+#  id         :integer          not null, primary key
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+admin:
+  created_at: <%= Date.parse("2019-01-01").to_s(:db) %>

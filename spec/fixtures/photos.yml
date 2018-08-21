@@ -1,0 +1,28 @@
+# == Schema Information
+#
+# Table name: photos
+#
+#  id                 :integer          not null, primary key
+#  customer_id        :integer
+#  image_file_name    :string
+#  image_content_type :string
+#  image_file_size    :integer
+#  image_updated_at   :datetime
+#  rating             :float
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  visit_id           :integer
+#
+
+ben_raspail_previous_visit_photo:
+  customer: ben_raspail
+  visit_id: 123 # ben_raspail_previous_visit
+  image_file_name: ben_raspail_previous_visit_photo.jpg
+  image_content_type: image/jpeg
+  image_file_size: 9000
+
+ben_raspail_photo:
+  customer: ben_raspail
+  image_file_name: ben_raspail_photo.jpg
+  image_content_type: image/jpeg
+  image_file_size: 9001

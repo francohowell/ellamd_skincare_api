@@ -1,0 +1,29 @@
+s3_access_key_id: ""
+s3_secret_access_key: ""
+s3_region: us-east-1
+
+twilio_account_sid: ""
+twilio_auth_token: ""
+
+facebook_app_id: ""
+facebook_app_secret: ""
+
+test:
+  protocol: http
+  host: lvh.me:3000
+  cookie_domain: .lvh.me
+  cookie_name: _ellamd_session_development_v1
+  secret_token: q9BiuUPmsEYXbOIvgyhzReW6AQO0dLHr
+  devise_secret_key: 2oKVb2iNHQS4bOd8pYZjbppghyT8CHkr
+  devise_pepper: Ex0E8pdcIaYNuPAir8hiVAjlj9fthixr
+  s3_bucket_name: ellamd-v1-development
+  stripe_plan_id: ""
+  stripe_publishable_key: ""
+  stripe_secret_key: ""
+  stripe_signing_secret: ""
+  sentry_config_url: ""
+  twilio_phone: ""
+  sendgrid_api_key: ""
+  segment_write_key: ""
+  should_send_emails: "false"
+  should_bcc_emails: "false"

@@ -1,0 +1,24 @@
+# == Schema Information
+#
+# Table name: product_ingredients
+#
+#  id         :integer          not null, primary key
+#  name       :string           not null
+#  origin_id  :integer
+#  is_key     :boolean          default(TRUE), not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+water:
+  name: Water
+  is_key: false
+
+vitamin_d:
+  name: Vitamin D
+  is_key: true
+
+cholecalciferol:
+  name: Cholecalciferol
+  origin: vitamin_d
+  is_key: true

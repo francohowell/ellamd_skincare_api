@@ -1,0 +1,22 @@
+# == Schema Information
+#
+# Table name: annotations
+#
+#  id           :integer          not null, primary key
+#  photo_id     :integer
+#  physician_id :integer
+#  position_x   :float            not null
+#  position_y   :float            not null
+#  note         :text
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
+
+
+ben_raspail_previous_visit_photo_annotation:
+  photo: ben_raspail_previous_visit_photo
+  physician: hannibal_lecter
+
+  position_x: 1.2
+  position_y: 3.4
+  note: Hey!

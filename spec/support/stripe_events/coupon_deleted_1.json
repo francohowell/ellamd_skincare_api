@@ -1,0 +1,20 @@
+{
+  "object": {
+    "id": "HERP-DERP",
+    "object": "coupon",
+    "amount_off": null,
+    "created": 1516305720,
+    "currency": null,
+    "duration": "once",
+    "duration_in_months": null,
+    "livemode": false,
+    "max_redemptions": 100,
+    "metadata": {
+    },
+    "percent_off": 50,
+    "redeem_by": null,
+    "times_redeemed": 4,
+    "valid": false
+  },
+  "previous_attributes": null
+}

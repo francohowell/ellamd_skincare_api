@@ -1,0 +1,54 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.sendgrid.com/v3/mail/send
+    body:
+      encoding: UTF-8
+      string: '{"from":{"email":"hello@ellamd.com","name":"EllaMD"},"personalizations":[{"to":[{"email":"customer@ellamd.com","name":"Customer
+        first name Customer last name"}],"substitutions":{"%first_name%":"Customer
+        first name","%last_name%":"Customer last name"}}],"template_id":"8a3bae2d-113d-4113-a04e-2d545fd811fb","mail_settings":{"sandbox_mode":{"enable":true}}}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/json
+      User-Agent:
+      - sendgrid/5.0.0;ruby
+      Authorization:
+      - "<AUTHORIZATION>"
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Mon, 19 Feb 2018 13:11:33 GMT
+      Content-Type:
+      - text/plain; charset=utf-8
+      Content-Length:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Message-Id:
+      - jtmf6FU2T5KMdwwP-bnIEw
+      Access-Control-Allow-Origin:
+      - https://sendgrid.api-docs.io
+      Access-Control-Allow-Methods:
+      - POST
+      Access-Control-Allow-Headers:
+      - Authorization, Content-Type, On-behalf-of, x-sg-elas-acl
+      Access-Control-Max-Age:
+      - '600'
+      X-No-Cors-Reason:
+      - https://sendgrid.com/docs/Classroom/Basics/API/cors.html
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Mon, 19 Feb 2018 13:11:33 GMT
+recorded_with: VCR 4.0.0

@@ -1,0 +1,16 @@
+# == Schema Information
+#
+# Table name: formulations
+#
+#  id         :integer          not null, primary key
+#  number     :integer
+#  main_tag   :text
+#  cream_base :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+against_acne:
+  number: 1
+  main_tag: Anti-acne
+  cream_base: hrt

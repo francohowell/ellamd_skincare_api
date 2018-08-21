@@ -1,0 +1,197 @@
+<%
+##
+# An HTML template for the Prescription PDFs that the app generates.
+#
+# `@prescription` is provided for data. The below is styled by the CSS found in the head section of
+# the PDF layout.
+%>
+
+<% customer = @prescription.customer %>
+<% physician = customer.physician %>
+<% identity = customer.identity %>
+<% medical_profile = customer.medical_profile %>
+
+<span class="token"><%= @prescription.token -%></span>
+<h1>
+  <strong>EllaMD</strong> Prescription:
+  <%= @prescription.created_at.in_time_zone("Pacific Time (US & Canada)").strftime("%Y-%m-%d") -%>
+</h1>
+
+<div class="columns">
+  <div class="column">
+    <h2>Patient</h2>
+    <table>
+      <tbody>
+        <tr>
+          <td class="field-name">Name</td>
+          <td>
+            <%= identity.first_name -%>
+            <%= identity.last_name -%>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="field-name">Address</td>
+          <td>
+            <%= customer.address_line_1 -%><br />
+            <%= customer.address_line_2 -%>
+            <%- if customer.address_line_2.present? -%><br /><%- end -%>
+            <%= customer.city -%>, <%= customer.state -%>
+            <%= customer.zip_code -%>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="field-name">Date of birth</td>
+          <td><%= medical_profile.date_of_birth&.strftime("%Y-%m-%d") -%></td>
+        </tr>
+
+        <tr>
+          <td class="field-name">Shipping instructions</td>
+          <td>USPS 2 day</td>
+        </tr>
+
+        <tr>
+          <td class="field-name">Shipping signature</td>
+          <td>Signature NOT required on delivery</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="column">
+    <h2>Physician</h2>
+    <table>
+      <tbody>
+        <tr>
+          <td class="field-name">Name</td>
+          <td>
+            <%= physician.identity.first_name -%>
+            <%= physician.identity.last_name -%>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="field-name">Address</td>
+          <td><%= physician.address.gsub("\n", "<br />").html_safe -%></td>
+        </tr>
+
+        <tr>
+          <td class="field-name">Phone number</td>
+          <td><%= physician.phone -%></td>
+        </tr>
+
+        <tr>
+          <td class="field-name">Email address</td>
+          <td><%= physician.identity.email -%></td>
+        </tr>
+
+        <tr>
+          <td class="field-name">State license</td>
+          <td><%= physician.state_license -%></td>
+        </tr>
+
+        <tr>
+          <td class="field-name">DEA license</td>
+          <td><%= physician.dea_license -%></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="columns">
+  <div class="column">
+    <h2>Ingredients &amp; concentrations</h2>
+    <table>
+      <tbody>
+        <%- @prescription.prescription_ingredients.each do |prescription_ingredient| -%>
+          <tr>
+            <td class="field-name">
+              <%= prescription_ingredient.ingredient.name -%>
+            </td>
+            <td>
+              <%=
+                number_with_precision(prescription_ingredient.amount,
+                  precision: PrescriptionIngredient::AMOUNT_PRECISION)
+              -%><%= prescription_ingredient.ingredient.unit -%>
+            </td>
+          </tr>
+        <%- end -%>
+      </tbody>
+    </table>
+
+    <h2>Physician signature</h2>
+    <p>
+      <img src="<%= physician.signature_image.url -%>" class="signature" />
+    </p>
+  </div>
+
+  <div class="column">
+    <h2>Cream base &amp; fragrance</h2>
+    <table>
+      <tbody>
+        <tr>
+          <td class="field-name">Cream base</td>
+          <td><%= {"hrt" => "HRT", "anhydrous" => "Anhydrous"}[@prescription.cream_base] -%></td>
+        </tr>
+        <tr>
+          <td class="field-name">Fragrance</td>
+          <td>
+            <%=
+              {
+                "no_scent" => "No scent",
+                "rose_hip" => "Rose hip",
+                "eucalyptus" => "Eucalyptus",
+              }[@prescription.fragrance]
+            -%>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Patient details</h2>
+    <table>
+      <tbody>
+        <tr>
+          <td class="field-name">Known allergies</td>
+          <td>
+            <%- if medical_profile.known_allergies.blank? -%>
+              <em>None</em>
+            <%- else -%>
+              <%= medical_profile.known_allergies -%>
+            <%- end -%>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="field-name">Refills</td>
+          <td>0</td>
+        </tr>
+
+        <tr>
+          <td class="field-name">Quantity</td>
+          <td>1 × <strong><%= @prescription.volume_in_ml -%>ml</strong></em></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Sig.</h2>
+    <p>
+      <%- if @prescription.signa.blank? -%>
+        <em>None</em>
+      <%- else -%>
+        <%= @prescription.signa -%>
+      <%- end -%>
+    </p>
+
+    <h2>Notes for pharmacist</h2>
+    <p>
+      <%- if @prescription.pharmacist_instructions.blank? -%>
+        <em>None</em>
+      <%- else -%>
+        <%= @prescription.pharmacist_instructions -%>
+      <%- end -%>
+    </p>
+  </div>
+</div>
